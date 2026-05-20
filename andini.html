@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Andini...</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460, #e94560);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        #cover, #content {
+            position: absolute;
+            width: 90%;
+            max-width: 600px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        #content {
+            opacity: 0;
+            transform: scale(0.8);
+            pointer-events: none;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #ff9a9e;
+        }
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+        .signature {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #ff9a9e;
+            margin-top: 20px;
+            text-align: right;
+            display: block;
+        }
+        button {
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            color: #333;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 154, 158, 0.5);
+        }
+        /* Floating Hearts Animation */
+        .heart {
+            position: absolute;
+            bottom: -100px;
+            background-color: #ff9a9e;
+            width: 20px;
+            height: 20px;
+            transform: rotate(-45deg);
+            animation: float 5s ease-in infinite;
+            opacity: 0;
+        }
+        .heart::before, .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff9a9e;
+            border-radius: 50%;
+        }
+        .heart::before { top: -10px; left: 0; }
+        .heart::after { top: 0; left: 10px; }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(-45deg) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(-45deg) scale(0.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Musik Latar Romantis (Royalty Free dari Pixabay) -->
+    <audio id="bgMusic" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="cover">
+        <h1>Hai, Andini...</h1>
+        <p>Ada sesuatu yang ingin aku sampaikan ke kamu. Boleh minta waktumu sebentar?</p>
+        <button onclick="bukaPesan()">Buka Pesan</button>
+    </div>
+
+    <div id="content">
+        <h1>Untuk Andini,</h1>
+        <p>Aku tahu banyak hal yang udah terjadi di antara kita. Mungkin kita pernah sama-sama egois, atau mungkin situasi yang bikin kita harus saling menjauh waktu itu.</p>
+        <p>Tapi jujur, sampai detik ini, namamu masih jadi hal yang paling sering muncul di kepalaku. Kehilangan kamu ternyata jauh lebih berat dari yang aku bayangkan.</p>
+        <p>Kalau kamu berkenan, aku pengen kita mulai lagi. Bukan dari nol, tapi dari semua pelajaran dan gak ada hal terindah bersama kamu yang udah pernah kita lewati sama-sama. Kasih aku kesempatan buat bahagiain kamu lagi ya?</p>
+        <span class="signature">- Aziz</span>
+    </div>
+
+    <script>
+        function bukaPesan() {
+            // Mainkan musik
+            const music = document.getElementById("bgMusic");
+            music.volume = 0.5; // Atur volume 50%
+            music.play();
+
+            // Animasi transisi layar
+            const cover = document.getElementById("cover");
+            const content = document.getElementById("content");
+
+            cover.style.opacity = "0";
+            cover.style.transform = "scale(0.8)";
+            cover.style.pointerEvents = "none";
+
+            setTimeout(() => {
+                content.style.opacity = "1";
+                content.style.transform = "scale(1)";
+                content.style.pointerEvents = "auto";
+                buatHati();
+            }, 1000);
+        }
+
+        function buatHati() {
+            setInterval(() => {
+                const heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 7000);
+            }, 500);
+        }
+    </script>
+</body>
+</html>
